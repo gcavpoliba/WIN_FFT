@@ -327,7 +327,7 @@ def amplification(acc_in, dt_in, acc_out, dt_out, baseline="Nessuna", taper_pct=
 
 
 # --------------------------------------------------------------------------
-# Aiuto al confronto con un software esterno (es. SeismoSignal)
+# Aiuto al confronto con un software esterno (es. riferimento)
 # --------------------------------------------------------------------------
 def identify_normalization(k, dt, N, n0):
     """
