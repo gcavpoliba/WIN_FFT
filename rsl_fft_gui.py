@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 rsl_fft_gui.py - GUI per la Risposta Sismica Locale
-  Scheda 1: lettura accelerogramma + spettro di Fourier (confrontabile con SeismoSignal)
+  Scheda 1: lettura accelerogramma + spettro di Fourier 
   Scheda 2: due accelerogrammi (input/base e output/superficie) -> funzione di amplificazione
 
 Requisiti: Python 3.8+, numpy, matplotlib (tkinter incluso in Python)
@@ -181,7 +181,7 @@ class FourierTab(ttk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.last = None
-        self.ref = None  # (f, amp) letto da SeismoSignal
+        self.ref = None  # 
 
         left = ttk.Frame(self, padding=4)
         left.pack(side="left", fill="y")
@@ -229,7 +229,7 @@ class FourierTab(ttk.Frame):
         ttk.Button(b, text="Aggiorna grafico", command=self.plot).grid(row=0, column=1, padx=2, pady=2, sticky="ew")
         ttk.Button(b, text="Esporta spettro…", command=self.export).grid(row=1, column=0, padx=2, pady=2, sticky="ew")
         ttk.Button(b, text="Rimuovi riferimento", command=self.clear_ref).grid(row=1, column=1, padx=2, pady=2, sticky="ew")
-        ttk.Button(b, text="Carica spettro SeismoSignal (riferimento)…", command=self.load_ref).grid(
+        ttk.Button(b, text="Carica spettro per confronto…", command=self.load_ref).grid(
             row=2, column=0, columnspan=2, padx=2, pady=2, sticky="ew")
         b.columnconfigure((0, 1), weight=1)
 
@@ -315,7 +315,7 @@ class FourierTab(ttk.Frame):
         arrays = [amp, amp_s]
         if self.ref is not None:
             fr, ar = self.ref
-            ax2.plot(fr[fr > 0], ar[fr > 0], "r--", lw=1.2, label="SeismoSignal (riferimento)")
+            ax2.plot(fr[fr > 0], ar[fr > 0], "r--", lw=1.2, label="riferimento")
             arrays.append(np.interp(f, fr, ar))
         ax2.set_xscale("log" if self.v_xlog.get() else "linear")
         ax2.set_yscale("log" if self.v_ylog.get() else "linear")
@@ -349,10 +349,10 @@ class FourierTab(ttk.Frame):
             lines += ["", "--- Confronto con il riferimento ---"] + self.reference_stats(uf)
         set_text(self.info, "\n".join(lines))
 
-    # ---- riferimento SeismoSignal -------------------------------------
+    # ---- riferimento  -------------------------------------
     def load_ref(self):
         path = filedialog.askopenfilename(
-            title="Spettro di Fourier esportato da SeismoSignal (frequenza, ampiezza)",
+            title="Spettro di Fourier esportato  (frequenza, ampiezza)",
             filetypes=[("Testo", "*.txt *.dat *.csv *.tsv *.asc"), ("Tutti i file", "*.*")])
         if not path:
             return
@@ -366,7 +366,7 @@ class FourierTab(ttk.Frame):
         if self.last is None:
             messagebox.showinfo("Riferimento caricato",
                                 "Riferimento caricato: calcola ora la FFT per vedere il confronto.\n"
-                                "Imposta «Unità di visualizzazione» uguale all'unità dell'export di SeismoSignal.")
+                                "Imposta «Unità di visualizzazione» uguale all'unità dell'export di riferimento.")
         else:
             self.plot()
 
@@ -614,13 +614,13 @@ class AmplificationTab(ttk.Frame):
 # --------------------------------------------------------------------------
 # Finestra principale
 # --------------------------------------------------------------------------
-HELP = """CONFRONTO CON SEISMOSIGNAL
+HELP = """CONFRONTO CON riferimento
 
-1) Esporta da SeismoSignal lo spettro di Fourier dello stesso accelerogramma
+1) Esporta da riferimento lo spettro di Fourier dello stesso accelerogramma
    (frequenza, ampiezza) in un file di testo.
 2) Nella scheda «Spettro di Fourier» carica l'accelerogramma, imposta
    «Unità di visualizzazione» uguale all'unità dell'export e premi Calcola FFT.
-3) «Carica spettro SeismoSignal (riferimento)…» sovrappone la curva
+3) «Carica spettro riferimento…» sovrappone la curva
    e riporta il rapporto riferimento/|FFT| grezza: il programma indica
    quale normalizzazione (dt, 1/N, 2/N …) e quale fattore di unità la
    riproducono, e lo scarto residuo.
