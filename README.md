@@ -5,7 +5,7 @@ Interfaccia grafica (Tkinter + Matplotlib) per la risposta sismica locale:
 
 - **Spettro di Fourier** di un accelerogramma (PEER NGA `.AT2`, due colonne tempo/accelerazione, una colonna + dt),
   con linea di base, taper, zero-padding, normalizzazione e smoothing (Konno-Ohmachi / media mobile).
-  Permette di sovrapporre lo spettro esportato da **SeismoSignal** e identifica la normalizzazione compatibile.
+  Permette di sovrapporre lo spettro esportato  e identifica la normalizzazione compatibile.
 - **Funzione di amplificazione** AF(f) = |Output| / |Input| fra due accelerogrammi (base e superficie), con ricerca di f0.
 
 ## Uso da sorgente
