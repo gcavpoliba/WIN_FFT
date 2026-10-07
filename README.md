@@ -1,3 +1,4 @@
+![WIN_FFT](RSL_FFT.png)
 # RSL – Spettro di Fourier e funzione di amplificazione
 
 Interfaccia grafica (Tkinter + Matplotlib) per la risposta sismica locale:
